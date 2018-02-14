@@ -1,4 +1,4 @@
-# WP docker build container or GitLab CI
+# WP docker build container for GitLab CI
 
 this simple container extends [edbizarro/gitlab-ci-pipeline-php:7.1-alpine](https://github.com/edbizarro/gitlab-ci-pipeline-php) to support building front end assets, including imagemin for image optimisation, and deploying via the [Dploy](https://www.npmjs.com/package/dploy) npm module.
 
