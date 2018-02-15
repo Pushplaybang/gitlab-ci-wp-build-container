@@ -1,10 +1,14 @@
 FROM edbizarro/gitlab-ci-pipeline-php:7.1-alpine
 LABEL maintainer="Paul van Zyl"
 
-RUN sudo apk update
+USER root
 
-RUN sudo apk add automake alpine-sdk nasm autoconf build-base zlib zlib-dev libpng libpng-dev libwebp libwebp-dev libjpeg-turbo libjpeg-turbo-dev imagemagick
+RUN apk add --update --no-cache automake alpine-sdk nasm autoconf build-base zlib zlib-dev libpng libpng-dev libwebp libwebp-dev libjpeg-turbo libjpeg-turbo-dev
 
-RUN sudo npm install -g dploy
+# imagick
+RUN apk add --update --no-cache autoconf g++ imagemagick-dev libtool make pcre-dev \
+  && pecl install imagick \
+  && docker-php-ext-enable imagick \
+  && apk del autoconf g++ libtool make pcre-dev
 
 WORKDIR /var/www/html
